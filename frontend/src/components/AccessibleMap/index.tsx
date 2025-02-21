@@ -1,0 +1,124 @@
+// src/components/AccessibleMap/index.tsx
+import React, { useEffect, useRef, useState } from 'react';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import OSM from 'ol/source/OSM';
+import XYZ from 'ol/source/XYZ';
+import { fromLonLat } from 'ol/proj';
+import 'ol/ol.css';
+import './styles.css';
+
+interface AccessibleMapProps {
+  className?: string;
+}
+
+const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const mapInstance = useRef<Map | null>(null);
+  const [currentView, setCurrentView] = useState<'standard' | 'satellite'>('standard');
+  const [startLocation, setStartLocation] = useState('');
+  const [endLocation, setEndLocation] = useState('');
+  const vectorSourceRef = useRef<VectorSource>(new VectorSource());
+
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    const vectorLayer = new VectorLayer({
+      source: vectorSourceRef.current
+    });
+
+    const standardLayer = new TileLayer({
+      source: new OSM(),
+      visible: true
+    });
+
+    const satelliteLayer = new TileLayer({
+      source: new XYZ({
+        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        maxZoom: 19
+      }),
+      visible: false
+    });
+
+    mapInstance.current = new Map({
+      target: mapRef.current,
+      layers: [standardLayer, satelliteLayer, vectorLayer],
+      view: new View({
+        center: fromLonLat([-84.5831, 34.0390]),
+        zoom: 17,
+        maxZoom: 19
+      })
+    });
+
+    return () => {
+      if (mapInstance.current) {
+        mapInstance.current.setTarget(undefined);
+      }
+    };
+  }, []);
+
+  const toggleMapView = () => {
+    if (!mapInstance.current) return;
+
+    const layers = mapInstance.current.getLayers().getArray();
+    const standardLayer = layers[0];
+    const satelliteLayer = layers[1];
+
+    if (currentView === 'standard') {
+      standardLayer.setVisible(false);
+      satelliteLayer.setVisible(true);
+      setCurrentView('satellite');
+    } else {
+      standardLayer.setVisible(true);
+      satelliteLayer.setVisible(false);
+      setCurrentView('standard');
+    }
+  };
+
+  return (
+    <div className="map-page">
+      <div className="route-inputs">
+        <div className="input-group">
+          <input
+            type="text"
+            value={startLocation}
+            onChange={(e) => setStartLocation(e.target.value)}
+            placeholder="Start"
+            className="location-input"
+          />
+        </div>
+        <div className="route-dots">
+          <span className="dot"></span>
+          <span className="dot"></span>
+          <span className="dot"></span>
+          <span className="dot"></span>
+          <span className="dot"></span>
+        </div>
+        <div className="input-group">
+          <input
+            type="text"
+            value={endLocation}
+            onChange={(e) => setEndLocation(e.target.value)}
+            placeholder="End"
+            className="location-input"
+          />
+        </div>
+      </div>
+      <div className={`map-root ${className || ''}`}>
+        <div ref={mapRef} className="map-container" />
+        <button 
+          type="button" 
+          onClick={toggleMapView}
+          className="map-toggle-button"
+        >
+          {currentView === 'standard' ? 'Satellite View' : 'Standard View'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default AccessibleMap;
