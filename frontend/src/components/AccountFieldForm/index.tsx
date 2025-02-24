@@ -19,7 +19,8 @@ export const AccountPreferencesAndInfo: React.FC<AccountPreferencesAndInfoProps>
     const accessibilityOptions = [
         "Accessibility Entrances",
         "Screen Reader",
-        "High Contrast Mode"
+        "High Contrast Mode",
+        "Show elevators"
     ];
     const lifestyleOptions = [
         "Prioritize Longer Routes",
@@ -28,12 +29,12 @@ export const AccountPreferencesAndInfo: React.FC<AccountPreferencesAndInfoProps>
     return (
         <div className="account-preferences">
             <div className="accessibility-preferences">
-                <p>Accessibility</p>
+                <p>Accessibility</p> <br />
                 {
                     accessibilityOptions.map((option) => {
                         const optionClassName = option.trim().toLowerCase().split(" ").join("-")
                         return (
-                            <div>
+                            <div className="account-info-row">
                                 <input className={`accessibility-option ${optionClassName}`} type="checkbox" />
                                 <label className="label">{option}</label>
                             </div>
@@ -58,7 +59,7 @@ export const AccountPreferencesAndInfo: React.FC<AccountPreferencesAndInfoProps>
                     lifestyleOptions.map((option) => {
                         const optionClassName = option.trim().toLowerCase().split(" ").join("-")
                         return (
-                            <div>
+                            <div className="fitness-options">
                                 <input className={`lifestyle-option ${optionClassName}`} type="checkbox" />
                                 <label className="label">{option}</label>
                             </div>

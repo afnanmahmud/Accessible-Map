@@ -14,7 +14,9 @@
 .account-field-input {
     margin: 0 1rem;
     width: 350px;
-    height: 30px;
+    height: 35px;
+    border: 1px solid darkgray;
+    border-radius: 3px;
 }
 
 .account-field-name {
@@ -25,9 +27,12 @@
 .account-field-button {
     height: 35px;
     width: 75px;
-    border-radius: 6px;
+    border-radius: 4px;
     background-color: rgb(217, 217, 217);
-    font-size: 13px;
+    font-size: 15px;
+    color: rgb(57, 57, 57);
+    border: 1px solid darkgray;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .account-preferences {
@@ -39,10 +44,16 @@
 
 .accessibility-preferences {
     margin: 0 1rem 0 0;
+
+}
+
+.accessibility-option {
+    background-color: yellow;
 }
 
 .lifestyle-preferences {
     margin: 0 1rem 0 0;
+    margin-left: 7rem;
 }
 
 .weight {
@@ -71,9 +82,6 @@
     margin-bottom: 30px;
     margin-top: 30px;
     margin-left: -20px;
-
-
-
 }
 
 .height-input-ft {
@@ -82,6 +90,7 @@
     border-radius: 3px;
     border: 1px solid rgb(211, 211, 211);
     padding: 5px;
+    margin-left: 4px;
 
 }
 
@@ -97,6 +106,7 @@
     border-radius: 3px;
     border: 1px solid rgb(211, 211, 211);
     padding: 5px;
+    margin-left: 10px;
 
 }
 
@@ -105,6 +115,16 @@
 
 }
 
+
 .label {
     margin: 0 1rem;
+
+}
+
+.account-info-row {
+    margin-bottom: 1.5rem;
+}
+
+.fitness-options {
+    margin-bottom: 1.5rem;
 }

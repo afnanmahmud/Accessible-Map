@@ -4,7 +4,8 @@ import "./styles.css"
 import { IconButtonProps, NavButtonGroupProps, NavButtonProps } from "@/types";
 import { Link } from "react-router-dom";
 import { HomePageRoute } from "@/pages/HomePage";
-import accountImage from "../../assets/account.png";
+import accountImage from "../../assets/accountIcon.svg";
+import bookmark from "../../assets/bookmark.svg";
 
 export const NavButton: React.FC<NavButtonProps> = ({
     route,
@@ -39,6 +40,7 @@ const NavButtonGroup: React.FC<NavButtonGroupProps> = () => {
         <div className="nav-button-group">
             <IconButton
                 route={HomePageRoute}
+                src={bookmark}
                 style={{
                     padding: "1rem"
                 }}

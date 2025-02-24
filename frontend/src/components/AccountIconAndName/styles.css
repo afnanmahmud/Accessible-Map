@@ -6,13 +6,17 @@
     padding: 1rem;
 }
 
-.account-icon {}
 
-.icon {}
+.icon {
+    width: 100px;
+    height: 100px;
+    margin-left: 35px;
+}
 
 .user-name {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 3rem;
+    font-size: 25px;
 }
