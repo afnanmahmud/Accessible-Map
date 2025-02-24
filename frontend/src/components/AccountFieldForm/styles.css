@@ -1,0 +1,110 @@
+.account-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 1rem;
+}
+
+.account-field {
+    margin: 0 0 1rem 0;
+    padding: 20px;
+}
+
+.account-field-input {
+    margin: 0 1rem;
+    width: 350px;
+    height: 30px;
+}
+
+.account-field-name {
+    margin: 0 1rem;
+
+}
+
+.account-field-button {
+    height: 35px;
+    width: 75px;
+    border-radius: 6px;
+    background-color: rgb(217, 217, 217);
+    font-size: 13px;
+}
+
+.account-preferences {
+    display: flex;
+    margin: 0 1rem;
+    padding: 30px;
+
+}
+
+.accessibility-preferences {
+    margin: 0 1rem 0 0;
+}
+
+.lifestyle-preferences {
+    margin: 0 1rem 0 0;
+}
+
+.weight {
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: -20px;
+
+
+}
+
+.weight-input {
+    height: 25px;
+    width: 100px;
+    border-radius: 3px;
+    border: 1px solid rgb(211, 211, 211);
+    padding: 5px;
+}
+
+.weight-input::placeholder {
+    text-align: right;
+}
+
+.height {
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: -20px;
+
+
+
+}
+
+.height-input-ft {
+    height: 25px;
+    width: 100px;
+    border-radius: 3px;
+    border: 1px solid rgb(211, 211, 211);
+    padding: 5px;
+
+}
+
+.height-input-ft::placeholder {
+    text-align: right;
+
+}
+
+
+.height-input-in {
+    height: 25px;
+    width: 100px;
+    border-radius: 3px;
+    border: 1px solid rgb(211, 211, 211);
+    padding: 5px;
+
+}
+
+.height-input-in::placeholder {
+    text-align: right;
+
+}
+
+.label {
+    margin: 0 1rem;
+}

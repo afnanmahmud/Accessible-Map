@@ -1,0 +1,39 @@
+.route-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+    width: 80%;
+}
+
+.input-group {
+    flex: 1;
+}
+
+.location-input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.location-input:focus {
+    border-color: #3388ff;
+}
+
+.route-dots {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background-color: #666;
+    border-radius: 50%;
+    opacity: 0.5;
+}

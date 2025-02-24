@@ -1,15 +1,20 @@
 import React from 'react';
-import AccessibleMap from './components/AccessibleMap';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
+import HomePage from './pages/HomePage';
+import AccountPage from './pages/AccountPage';
+import PageNotFound from './pages/PageNotFound';
 
 const App: React.FC = () => {
   return (
-    <div className="app-container">
-      <h1 className="app-title">Accessible Interactive Map</h1>
-      <div className="map-wrapper">
-        <AccessibleMap />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route index element={<HomePage />} />
+        <Route path="/account" element={<AccountPage />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

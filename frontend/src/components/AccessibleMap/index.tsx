@@ -10,17 +10,14 @@ import XYZ from 'ol/source/XYZ';
 import { fromLonLat } from 'ol/proj';
 import 'ol/ol.css';
 import './styles.css';
-
-interface AccessibleMapProps {
-  className?: string;
-}
+import { AccessibleMapProps } from '@/types';
+import MapSearch from '../MapSearch';
+import NavButtonGroup from '../NavButtonGroup';
 
 const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<Map | null>(null);
   const [currentView, setCurrentView] = useState<'standard' | 'satellite'>('standard');
-  const [startLocation, setStartLocation] = useState('');
-  const [endLocation, setEndLocation] = useState('');
   const vectorSourceRef = useRef<VectorSource>(new VectorSource());
 
   useEffect(() => {
@@ -79,43 +76,24 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
   };
 
   return (
-    <div className="map-page">
-      <div className="route-inputs">
-        <div className="input-group">
-          <input
-            type="text"
-            value={startLocation}
-            onChange={(e) => setStartLocation(e.target.value)}
-            placeholder="Start"
-            className="location-input"
-          />
+    <div>
+      <div className="map-wrapper">
+        <div className="map-page">
+          <div className="top-bar">
+            <MapSearch />
+            <NavButtonGroup />
+          </div>
+          <div className={`map-root ${className || ''}`}>
+            <div ref={mapRef} className="map-container" />
+            <button
+              type="button"
+              onClick={toggleMapView}
+              className="map-toggle-button"
+            >
+              {currentView === 'standard' ? 'Satellite View' : 'Standard View'}
+            </button>
+          </div>
         </div>
-        <div className="route-dots">
-          <span className="dot"></span>
-          <span className="dot"></span>
-          <span className="dot"></span>
-          <span className="dot"></span>
-          <span className="dot"></span>
-        </div>
-        <div className="input-group">
-          <input
-            type="text"
-            value={endLocation}
-            onChange={(e) => setEndLocation(e.target.value)}
-            placeholder="End"
-            className="location-input"
-          />
-        </div>
-      </div>
-      <div className={`map-root ${className || ''}`}>
-        <div ref={mapRef} className="map-container" />
-        <button 
-          type="button" 
-          onClick={toggleMapView}
-          className="map-toggle-button"
-        >
-          {currentView === 'standard' ? 'Satellite View' : 'Standard View'}
-        </button>
       </div>
     </div>
   );
