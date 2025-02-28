@@ -89,6 +89,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
               type="button"
               onClick={toggleMapView}
               className="map-toggle-button"
+              aria-label={currentView === 'standard' ? 'Switch to satellite view' : 'Switch to standard view'}
             >
               {currentView === 'standard' ? 'Satellite View' : 'Standard View'}
             </button>
