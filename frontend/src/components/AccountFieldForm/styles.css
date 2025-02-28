@@ -4,6 +4,7 @@
     justify-content: center;
     align-content: center;
     padding: 1rem;
+    margin-left: 50px;
 }
 
 .account-field {
@@ -47,9 +48,6 @@
 
 }
 
-.accessibility-option {
-    background-color: yellow;
-}
 
 .lifestyle-preferences {
     margin: 0 1rem 0 0;
