@@ -18,6 +18,8 @@ import NavButtonGroup from '../NavButtonGroup';
 import 'ol/ol.css';
 import './styles.css';
 
+const API_key =' 5b3ce3597851110001cf6248a1d686e75cef4e86a9782464ccdb71cf';
+
 const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<Map | null>(null);
@@ -123,6 +125,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
     );
   };
 
+  
   return (
     <div>
       <div className="map-wrapper">
