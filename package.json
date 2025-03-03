@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "express": "^4.21.2",
+    "ol": "^10.4.0",
+    "openrouteservice": "^0.1.2",
+    "openrouteservice-js": "^0.4.1"
+  }
+}

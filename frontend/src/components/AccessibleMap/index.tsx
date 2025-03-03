@@ -10,15 +10,22 @@ import XYZ from 'ol/source/XYZ';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import { fromLonLat } from 'ol/proj';
-import { Icon, Style } from 'ol/style';
+import { Icon, Style, Stroke } from 'ol/style';
+import LineString from 'ol/geom/LineString';
 import { defaults as defaultControls } from 'ol/control';
 import { AccessibleMapProps } from '@/types';
 import MapSearch from '../MapSearch';
 import NavButtonGroup from '../NavButtonGroup';
 import 'ol/ol.css';
 import './styles.css';
+import Openrouteservice from 'openrouteservice-js';
 
-const API_key =' 5b3ce3597851110001cf6248a1d686e75cef4e86a9782464ccdb71cf';
+const orsDirections = new Openrouteservice.Directions({
+  api_key: '5b3ce3597851110001cf6248a1d686e75cef4e86a9782464ccdb71cf',
+});
+
+const startCoordinates = [-84.5831447839737, 34.038533480073355]; // Start: Carmicheal Student Center
+const endCoordinates = [-84.58398431539538, 34.038308992850496]; 
 
 const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
@@ -26,6 +33,12 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
   const [currentView, setCurrentView] = useState<'standard' | 'satellite'>('standard');
   const vectorSourceRef = useRef(new VectorSource());
   const userMarkerRef = useRef(new Feature()); // User's live marker
+
+  // Accessible entry marker locations
+  const locations = [
+    { name: 'Carmicheal Student Center', coordinates: [-84.5831447839737, 34.038533480073355] },
+    { name: 'Georgia Tech', coordinates: [-84.3963, 33.7756] },
+  ];
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -56,9 +69,9 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       }),
       controls: defaultControls(),
     });
-
-    // Start live tracking
+    placeMarkers();
     startTracking();
+    drawRoute(); 
 
     return () => {
       if (mapInstance.current) {
@@ -83,6 +96,28 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       satelliteLayer.setVisible(false);
       setCurrentView('standard');
     }
+  };
+
+  //Add accessible entries
+  const placeMarkers = () => {
+    locations.forEach((location) => {
+      const coords = fromLonLat(location.coordinates);
+      
+      const marker = new Feature(new Point(coords));
+
+      marker.setStyle(
+        new Style({
+          image: new Icon({
+            src: 'https://cdn2.iconfinder.com/data/icons/wsd-map-markers-2/512/wsd_markers_97-512.png', // Custom Marker Icon
+            scale: 0.04,
+            anchor: [0.5, 1], 
+          }),
+        })
+      );
+
+      // Add the marker to the vector source
+      vectorSourceRef.current.addFeature(marker);
+    });
   };
 
   // Start live GPS tracking
@@ -124,8 +159,38 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       { enableHighAccuracy: true, maximumAge: 0 }
     );
   };
-
+  const drawRoute = () => {
+    orsDirections.calculate({
+      coordinates: [startCoordinates, endCoordinates],
+      alternative_routes: { target_count: 2, share_factor: 0.6 }, // Request alternative routes
+      profile: 'foot-walking', 
+      format: 'geojson',
+    })
+    .then((response: any) => {
+      const colors = ['blue', 'red', 'green']; // Different colors for alternative routes
   
+      response.features.forEach((feature: any, index: number) => {
+        const routeFeature = new Feature({
+          geometry: new LineString(feature.geometry.coordinates.map((coord: any) => fromLonLat(coord))),
+        });
+  
+        routeFeature.setStyle(
+          new Style({
+            stroke: new Stroke({
+              color: colors[index % colors.length], // Assign a different color for each route
+              width: index = 3, // Make the primary route thicker
+            }),
+          })
+        );
+  
+        vectorSourceRef.current.addFeature(routeFeature);
+      });
+    })
+    .catch((err: any) => console.error('Error fetching route:', err));
+  };
+  
+  
+
   return (
     <div>
       <div className="map-wrapper">
