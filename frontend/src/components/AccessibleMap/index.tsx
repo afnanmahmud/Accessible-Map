@@ -80,11 +80,13 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       <div className="map-wrapper">
         <div className="map-page">
           <div className="top-bar">
-            <MapSearch />
-            <NavButtonGroup />
+            <MapSearch aria-label="Search locations on the map"/>
+            <NavButtonGroup aria-label="Navigation buttons for the map"/>
           </div>
           <div className={`map-root ${className || ''}`}>
-            <div ref={mapRef} className="map-container" />
+            <div ref={mapRef} className="map-container" 
+              role="application"
+              aria-label="Interactive map displaying user location and navigation"/>
             <button
               type="button"
               onClick={toggleMapView}
