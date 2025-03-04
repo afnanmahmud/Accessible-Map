@@ -1,8 +1,8 @@
 .dropdown-container {
     position: absolute;
     z-index: 99999;
-    right: 1rem;
-    z-index: 99999;
+    right: 3rem;
+    bottom: 11rem;
 }
 
 .dropdown-option {
