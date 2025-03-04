@@ -24,7 +24,7 @@ const orsDirections = new Openrouteservice.Directions({
   api_key: '5b3ce3597851110001cf6248a1d686e75cef4e86a9782464ccdb71cf',
 });
 
-const startCoordinates = [-84.5831447839737, 34.038533480073355]; // Start: Carmicheal Student Center
+const startCoordinates = [-84.5831447839737, 34.038533480073355]; 
 const endCoordinates = [-84.58398431539538, 34.038308992850496]; 
 
 const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
@@ -120,7 +120,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
     });
   };
 
-  // Start live GPS tracking
+  // Start live tracking
   const startTracking = () => {
     if (!navigator.geolocation) {
       console.error('Geolocation is not supported by this browser.');
@@ -159,6 +159,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       { enableHighAccuracy: true, maximumAge: 0 }
     );
   };
+  // Gets regular routing
   const drawRoute = () => {
     orsDirections.calculate({
       coordinates: [startCoordinates, endCoordinates],
@@ -178,7 +179,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
           new Style({
             stroke: new Stroke({
               color: colors[index % colors.length], // Assign a different color for each route
-              width: index = 3, // Make the primary route thicker
+              width: index = 3, 
             }),
           })
         );
