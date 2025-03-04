@@ -8,7 +8,7 @@ const AccountIconAndName: React.FC<AccountIconAndNameProps> = ({
     return (
         <div className="account-icon-container">
             <div className="account-icon">
-                <img className="icon" src={src} />
+                <img className="icon" src={src} aria-label="Account icon or profile image"/>
             </div>
             <div className="user-name">
                 <p>{userName}</p>
