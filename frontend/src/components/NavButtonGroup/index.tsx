@@ -14,7 +14,7 @@ export const NavButton: React.FC<NavButtonProps> = ({
 }) => {
     return (
         <div className="nav-button" style={style}>
-            <Link className="nav-link round" to={route}>
+            <Link className="nav-link round" to={route} aria-label={`Navigate to ${title}`}>
                 <a className="nav-button">{title}</a>
             </Link>
         </div>
@@ -28,8 +28,8 @@ export const IconButton: React.FC<IconButtonProps> = ({
 }) => {
     return (
         <div className="nav-button" style={style}>
-            <Link className="nav-icon-link" to={route}>
-                <img className="nav-icon-img" src={src} />
+            <Link className="nav-icon-link" to={route} aria-label="Navigation icon">
+                <img className="nav-icon-img" src={src} alt="Navigation icon" />
             </Link>
         </div>
     );
@@ -44,6 +44,7 @@ const NavButtonGroup: React.FC<NavButtonGroupProps> = () => {
                 style={{
                     padding: "1rem"
                 }}
+                aria-label="Go to Home Page"
             />
             <IconButton
                 route={AccountPageRoute}
@@ -51,6 +52,7 @@ const NavButtonGroup: React.FC<NavButtonGroupProps> = () => {
                 style={{
                     padding: "1rem"
                 }}
+                aria-label="Go to Account Page"
             />
         </div>
     );
