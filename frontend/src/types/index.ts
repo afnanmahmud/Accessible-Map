@@ -35,13 +35,6 @@ export interface AccountIconAndNameProps {
   src?: string;
   userName: string;
 }
-export interface IconButtonProps {
-  src?: string;
-  route: string;
-  style?: React.CSSProperties;
-  children?: ReactElement;
-  onClick?: () => void;
-}
 export interface NavButtonProps {
   route: string;
   title: string;
