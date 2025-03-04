@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { HomePageRoute } from "@/pages/HomePage";
 import accountImage from "../../assets/accountIcon.svg";
 import bookmark from "../../assets/bookmark.svg";
+import { Dropdown } from "../Dropdown";
+import { useState } from "react";
 
 export const NavButton: React.FC<NavButtonProps> = ({
     route,
@@ -24,21 +26,36 @@ export const NavButton: React.FC<NavButtonProps> = ({
 export const IconButton: React.FC<IconButtonProps> = ({
     src,
     route,
-    style
+    style,
+    onClick,
+    children,
 }) => {
     return (
         <div className="nav-button" style={style}>
-            <Link className="nav-icon-link" to={route} aria-label="Navigation icon">
-                <img className="nav-icon-img" src={src} alt="Navigation icon" />
-            </Link>
+            <img className="nav-icon-img" src={src} />
+            {children}
         </div>
     );
 }
 
 const NavButtonGroup: React.FC<NavButtonGroupProps> = () => {
+    const [dropdown, setDropdown] = useState(false);
+
     return (
         <div className="nav-button-group">
-            <IconButton
+            <div className="nav-button">
+                <img className="nav-icon-img" src={bookmark} />
+            </div>
+            <div className="nav-button">
+                <img
+                    className="nav-icon-img"
+                    src={accountImage}
+                    onClick={() => setDropdown(!dropdown)} />
+                {
+                    dropdown && <Dropdown />
+                }
+            </div>
+            {/* <IconButton
                 route={HomePageRoute}
                 src={bookmark}
                 style={{
@@ -52,9 +69,15 @@ const NavButtonGroup: React.FC<NavButtonGroupProps> = () => {
                 style={{
                     padding: "1rem"
                 }}
-                aria-label="Go to Account Page"
-            />
+                onClick={() => setDropdown(!dropdown)}
+            >
+                {
+                    dropdown && <Dropdown />
+                }
+            </IconButton> */}
+
         </div>
+
     );
 };
 
