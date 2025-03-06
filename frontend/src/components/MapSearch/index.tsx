@@ -20,6 +20,7 @@ export const MapSearchInput: React.FC<MapSearchInputProps> = ({
     );
 };
 
+//map search bar (start and end points)
 const MapSearch: React.FC<MapSearchProps> = () => {
     const [startLocation, setStartLocation] = useState('');
     const [endLocation, setEndLocation] = useState('');

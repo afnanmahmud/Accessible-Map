@@ -1,6 +1,7 @@
 import { AccoundFieldProps, AccountFormProps, AccountPreferencesAndInfoProps } from "@/types";
 import "./styles.css"
 
+//user profile page
 export const AccoundField: React.FC<AccoundFieldProps> = ({
     fieldName,
     hidden
@@ -11,13 +12,14 @@ export const AccoundField: React.FC<AccoundFieldProps> = ({
             <p className="account-field-name">{fieldName}</p>
             <input type={hidden ? "password" : "text"} //added text, unsure if correct
                 className={`account-field-input ${fieldClassName}`}
-                aria-label={`Enter your ${fieldName}`}/>
+                aria-label={`Enter your ${fieldName}`} />
             <button className={`account-field-button ${fieldClassName}`}
                 aria-label={`Edit $fieldName}`}>Edit</button>
         </div>
     );
 };
 
+//accessability + lifestyle preferences
 export const AccountPreferencesAndInfo: React.FC<AccountPreferencesAndInfoProps> = () => {
     const accessibilityOptions = [
         "Accessibility Entrances",
@@ -38,8 +40,8 @@ export const AccountPreferencesAndInfo: React.FC<AccountPreferencesAndInfoProps>
                         const optionClassName = option.trim().toLowerCase().split(" ").join("-")
                         return (
                             <div className="account-info-row">
-                                <input className={`accessibility-option ${optionClassName}`} type="checkbox" 
-                                    id={optionClassName}/>
+                                <input className={`accessibility-option ${optionClassName}`} type="checkbox"
+                                    id={optionClassName} />
                                 <label className="label" htmlFor={optionClassName}>{option}</label>
                             </div>
                         )
@@ -50,16 +52,16 @@ export const AccountPreferencesAndInfo: React.FC<AccountPreferencesAndInfoProps>
                 <p>Lifestyle</p>
                 <div className="weight">
                     <p className="label">Weight</p>
-                    <input className="weight-input" placeholder="lbs" 
-                        aria-label="Enter weight in pounds"/>
+                    <input className="weight-input" placeholder="lbs"
+                        aria-label="Enter weight in pounds" />
                 </div>
                 <div className="height">
                     <p className="label">Height</p>
                     <input className="height-input-ft" placeholder="ft"
-                        aria-label="Enter height in feet"/>
+                        aria-label="Enter height in feet" />
                     <br />
                     <input className="height-input-in" placeholder="in"
-                        aria-label="Enter height in inches"/>
+                        aria-label="Enter height in inches" />
                     <br />
                 </div>
                 {
@@ -67,8 +69,8 @@ export const AccountPreferencesAndInfo: React.FC<AccountPreferencesAndInfoProps>
                         const optionClassName = option.trim().toLowerCase().split(" ").join("-")
                         return (
                             <div className="fitness-options">
-                                <input className={`lifestyle-option ${optionClassName}`} type="checkbox" 
-                                    id={optionClassName}/>
+                                <input className={`lifestyle-option ${optionClassName}`} type="checkbox"
+                                    id={optionClassName} />
                                 <label className="label" htmlFor={optionClassName}>{option}</label>
                             </div>
                         )

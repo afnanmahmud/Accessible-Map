@@ -14,6 +14,8 @@ import { AccessibleMapProps } from '@/types';
 import MapSearch from '../MapSearch';
 import NavButtonGroup from '../NavButtonGroup';
 
+
+//main / home page with map
 const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<Map | null>(null);
@@ -39,7 +41,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       }),
       visible: false
     });
-
+    //map default coordinates
     mapInstance.current = new Map({
       target: mapRef.current,
       layers: [standardLayer, satelliteLayer, vectorLayer],
@@ -57,6 +59,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
     };
   }, []);
 
+  //map view button
   const toggleMapView = () => {
     if (!mapInstance.current) return;
 
@@ -80,13 +83,13 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       <div className="map-wrapper">
         <div className="map-page">
           <div className="top-bar">
-            <MapSearch aria-label="Search locations on the map"/>
-            <NavButtonGroup aria-label="Navigation buttons for the map"/>
+            <MapSearch aria-label="Search locations on the map" />
+            <NavButtonGroup aria-label="Navigation buttons for the map" />
           </div>
           <div className={`map-root ${className || ''}`}>
-            <div ref={mapRef} className="map-container" 
+            <div ref={mapRef} className="map-container"
               role="application"
-              aria-label="Interactive map displaying user location and navigation"/>
+              aria-label="Interactive map displaying user location and navigation" />
             <button
               type="button"
               onClick={toggleMapView}
