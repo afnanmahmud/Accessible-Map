@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
-import HomePage from './pages/HomePage';
-import AccountPage from './pages/AccountPage';
-import PageNotFound from './pages/PageNotFound';
+import HomePage from './pages/HomePage/HomePage';
+import AccountPage from './pages/AccountPage/AccountPage';
+import PageNotFound from './pages/PageNotFound/PageNotFound';
 
 const App: React.FC = () => {
   return (

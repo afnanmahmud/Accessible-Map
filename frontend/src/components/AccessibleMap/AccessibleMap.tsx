@@ -11,8 +11,8 @@ import { fromLonLat } from 'ol/proj';
 import 'ol/ol.css';
 import './styles.css';
 import { AccessibleMapProps } from '@/types';
-import MapSearch from '../MapSearch';
-import NavButtonGroup from '../NavButtonGroup';
+import MapSearch from '../MapSearch/MapSearch';
+import NavButtonGroup from '../NavButtonGroup/NavButtonGroup';
 
 
 //main / home page with map

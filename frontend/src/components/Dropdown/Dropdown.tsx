@@ -1,7 +1,7 @@
 import { DropdownOptionProps, DropdownProps } from "@/types";
 import "./styles.css"
 import { Link } from "react-router-dom";
-import { AccountPageRoute } from "@/pages/AccountPage";
+import { AccountPageRoute } from "@/pages/AccountPage/AccountPage";
 
 export const DropdownOption: React.FC<DropdownOptionProps> = ({
     optionName,

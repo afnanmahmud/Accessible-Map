@@ -25,6 +25,14 @@ const MapSearch: React.FC<MapSearchProps> = () => {
     const [startLocation, setStartLocation] = useState('');
     const [endLocation, setEndLocation] = useState('');
 
+    const searchButtonClicked = () => {
+        console.log("Search button clicked");
+        console.log("startLocation", startLocation)
+        console.log("endLocation", endLocation)
+        // Uncomment with actual map api function call
+        // findShortestDistance(startLocation, endLocation)
+    }
+
     return (
         <div className="route-inputs">
             <MapSearchInput
@@ -44,6 +52,9 @@ const MapSearch: React.FC<MapSearchProps> = () => {
                 location={endLocation}
                 setLocation={setEndLocation}
             />
+
+            <button onClick={searchButtonClicked} className="goButton">Go</button>
+
         </div>
     );
 };

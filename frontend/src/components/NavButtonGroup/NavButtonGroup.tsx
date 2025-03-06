@@ -3,7 +3,7 @@ import { NavButtonGroupProps, NavButtonProps } from "@/types";
 import { Link } from "react-router-dom";
 import accountImage from "../../assets/accountIcon.svg";
 import bookmark from "../../assets/bookmark.svg";
-import { Dropdown } from "../Dropdown";
+import { Dropdown } from "../Dropdown/Dropdown";
 import { useState } from "react";
 
 export const NavButton: React.FC<NavButtonProps> = ({

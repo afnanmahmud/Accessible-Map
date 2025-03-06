@@ -37,3 +37,22 @@
     border-radius: 50%;
     opacity: 0.5;
 }
+
+.goButton {
+    font-size: 20px;
+    color: rgb(51, 51, 51);
+    background-color: rgb(126, 191, 126);
+    border: 1px solid rgb(160, 160, 160);
+    border-radius: 4px;
+    width: 6rem;
+    height: 40px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.goButton:hover {
+    background-color: rgb(180, 220, 180);
+    color: rgb(51, 51, 51);
+}
