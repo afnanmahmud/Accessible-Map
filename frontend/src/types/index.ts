@@ -1,5 +1,6 @@
 // src/components/AccessibleMap/types.ts
 import { OSM, XYZ } from 'ol/source';
+import { ReactElement } from 'react';
 
 export interface LayerProps {
   source: OSM | XYZ;
@@ -21,6 +22,11 @@ export interface MapSearchProps { }
 export interface NavButtonGroupProps { }
 export interface AccountFormProps { }
 export interface AccountPreferencesAndInfoProps { }
+export interface DropdownProps { }
+export interface DropdownOptionProps {
+  optionName: string;
+  optionUrl: string;
+}
 export interface AccoundFieldProps {
   fieldName: string;
   hidden: boolean;
@@ -28,11 +34,6 @@ export interface AccoundFieldProps {
 export interface AccountIconAndNameProps {
   src?: string;
   userName: string;
-}
-export interface IconButtonProps {
-  src?: string;
-  route: string;
-  style?: React.CSSProperties;
 }
 export interface NavButtonProps {
   route: string;

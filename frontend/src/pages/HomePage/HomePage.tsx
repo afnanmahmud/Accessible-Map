@@ -1,5 +1,5 @@
-import AccessibleMap from "@/components/AccessibleMap";
-import { PageTitle } from "@/components/PageTitle";
+import AccessibleMap from "@/components/AccessibleMap/AccessibleMap";
+import { PageTitle } from "@/components/PageTitle/PageTitle";
 import "./styles.css"
 
 const HomePage = () => {

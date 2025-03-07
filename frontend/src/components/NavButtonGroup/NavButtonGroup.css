@@ -2,14 +2,14 @@
     width: 20%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
 
 .nav-button {
     display: flex;
     justify-content: center;
     align-content: center;
-
+    padding: 1rem;
 }
 
 .nav-link {

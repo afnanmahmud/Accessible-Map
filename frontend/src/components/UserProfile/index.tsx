@@ -10,7 +10,9 @@ const UserProfile = () => {
     <div className="max-w-2xl mx-auto p-6 border rounded-lg shadow-lg bg-white">
 // Header
       <div className="flex justify-between items-center mb-4">
-        <button className="text-lg flex items-center gap-2 text-gray-700">
+        <button className="text-lg flex items-center gap-2 text-gray-700"
+          aria-label="Back to map"
+          >
           <FaArrowLeft /> Back
         </button>
         <div className="flex gap-4">
@@ -37,7 +39,9 @@ const UserProfile = () => {
               size="small"
               className="w-full"
             />
-            <Button variant="outlined" onClick={() => setEditEmail(!editEmail)}>
+            <Button variant="outlined" onClick={() => setEditEmail(!editEmail)}
+              aria-label={editEmail ? "Save email changes" : "Edit email"}
+              >
               {editEmail ? "Save" : "Edit"}
             </Button>
           </div>
@@ -53,7 +57,9 @@ const UserProfile = () => {
               size="small"
               className="w-full"
             />
-            <Button variant="outlined" onClick={() => setEditPassword(!editPassword)}>
+            <Button variant="outlined" onClick={() => setEditPassword(!editPassword)}
+            aria-label={editPassword ? "Save password changes" : "Edit password"}
+              >
               {editPassword ? "Save" : "Edit"}
             </Button>
           </div>

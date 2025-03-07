@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^2.5.1",
     "@types/ol": "^6.5.3",
     "axios": "^1.7.9",
+    "lucide-react": "^0.477.0",
     "mui": "^0.0.1",
     "ol": "^10.4.0",
     "react": "^19.0.0",

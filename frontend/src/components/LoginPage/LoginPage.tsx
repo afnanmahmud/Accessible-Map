@@ -32,7 +32,7 @@ const LoginPage = () => {
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Log In</h2>
         </div>
-        
+
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
