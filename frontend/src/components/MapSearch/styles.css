@@ -1,3 +1,5 @@
+/* Updated CSS for route inputs */
+
 .route-inputs {
     display: flex;
     align-items: center;
@@ -28,6 +30,53 @@
     display: flex;
     align-items: center;
     gap: 4px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background-color: #666;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+/* Additional styles for search container and find route button */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    width: 100%;
+}
+
+.find-route-button {
+    background-color: #ffb433;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    height: 44px;
+    transition: background-color 0.2s ease;
+}
+
+.find-route-button:hover {
+    background-color: #eeb122;
+}
+
+.find-route-button:active {
+    background-color: #dd9611;
+}
+
+/* Make the top bar properly contain the search */
+.top-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .dot {

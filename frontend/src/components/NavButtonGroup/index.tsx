@@ -1,6 +1,5 @@
 import { AccountPageRoute } from "@/pages/AccountPage";
 import "./styles.css"
-
 import { IconButtonProps, NavButtonGroupProps, NavButtonProps } from "@/types";
 import { Link } from "react-router-dom";
 import { HomePageRoute } from "@/pages/HomePage";
@@ -29,7 +28,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
     return (
         <div className="nav-button" style={style}>
             <Link className="nav-icon-link" to={route}>
-                <img className="nav-icon-img" src={src} />
+                <img className="nav-icon-img" src={src} alt="Navigation Icon" />
             </Link>
         </div>
     );

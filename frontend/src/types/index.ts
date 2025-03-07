@@ -39,8 +39,13 @@ export interface NavButtonProps {
   title: string;
   style?: React.CSSProperties;
 }
+export interface MapSearchProps {
+  onStartChange?: (value: string) => void;
+  onEndChange?: (value: string) => void;
+  onSubmit?: () => void;
+}
 export interface MapSearchInputProps {
   placeholder: string;
   location: string;
-  setLocation: (val: string) => void;
+  setLocation: (value: string) => void;
 }

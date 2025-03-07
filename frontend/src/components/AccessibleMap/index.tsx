@@ -1,4 +1,3 @@
-// src/components/AccessibleMap/index.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -24,20 +23,30 @@ const orsDirections = new Openrouteservice.Directions({
   api_key: '5b3ce3597851110001cf6248a1d686e75cef4e86a9782464ccdb71cf',
 });
 
-const startCoordinates = [-84.5831447839737, 34.038533480073355]; 
-const endCoordinates = [-84.58398431539538, 34.038308992850496]; 
-
 const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<Map | null>(null);
   const [currentView, setCurrentView] = useState<'standard' | 'satellite'>('standard');
   const vectorSourceRef = useRef(new VectorSource());
   const userMarkerRef = useRef(new Feature()); // User's live marker
-
+  
+  // State for route calculation
+  const [startLocation, setStartLocation] = useState('');
+  const [endLocation, setEndLocation] = useState('');
+  const [suggestions, setSuggestions] = useState<Array<{ name: string; coordinates: number[] }>>([]);
+  
   // Accessible entry marker locations
   const locations = [
     { name: 'Carmicheal Student Center', coordinates: [-84.5831447839737, 34.038533480073355] },
-    { name: 'Georgia Tech', coordinates: [-84.3963, 33.7756] },
+    { name: 'Carmicheal Student Center 2', coordinates: [-84.58283364772798, 34.038660170620055] },
+    { name: 'Academic Learning Center', coordinates: [-84.58317697048189, 34.03931806936354] },
+    { name: 'Academic Learning Center 2', coordinates: [-84.58298921585084, 34.03978259614599] },
+    { name: 'English', coordinates: [-84.58414524793626, 34.03942475516541] },
+    { name: 'English 2', coordinates: [-84.5841532945633, 34.03910025210137] },
+    { name: 'English 3', coordinates: [-84.58402454853059, 34.03979815441523] },
+    { name: 'University Hall', coordinates: [-84.58437055349351, 34.038938000103784] },
+    { name: 'Willingham Hall', coordinates: [-84.58483189344408, 34.038973562212] },
+    { name: 'Social Sciences', coordinates: [-84.58521813154222, 34.03870240076022] },
   ];
 
   useEffect(() => {
@@ -69,9 +78,9 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       }),
       controls: defaultControls(),
     });
+    
     placeMarkers();
     startTracking();
-    drawRoute(); 
 
     return () => {
       if (mapInstance.current) {
@@ -98,7 +107,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
     }
   };
 
-  //Add accessible entries
+  // Add accessible entries
   const placeMarkers = () => {
     locations.forEach((location) => {
       const coords = fromLonLat(location.coordinates);
@@ -148,7 +157,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
           vectorSourceRef.current.addFeature(userMarkerRef.current);
         }
 
-        //Follow user location
+        // Follow user location
         if (mapInstance.current) {
           mapInstance.current.getView().setCenter(coords);
         }
@@ -156,19 +165,64 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       (error) => {
         console.error('Error getting location:', error);
       },
-      { enableHighAccuracy: true, maximumAge: 0 }
+      { enableHighAccuracy: true, maximumAge: 0, timeout: 5000}
     );
   };
-  // Gets regular routing
-  const drawRoute = () => {
+
+  // Find location by name or partial match
+  const findLocationByName = (query: string) => {
+    if (!query) return null;
+    
+    // Try exact match first
+    const exactMatch = locations.find(loc => 
+      loc.name.toLowerCase() === query.toLowerCase()
+    );
+    
+    if (exactMatch) return exactMatch.coordinates;
+    
+    // Try partial match
+    const partialMatch = locations.find(loc => 
+      loc.name.toLowerCase().includes(query.toLowerCase())
+    );
+    
+    return partialMatch ? partialMatch.coordinates : null;
+  };
+
+  // Clear previous routes from the map
+  const clearRoutes = () => {
+    const features = vectorSourceRef.current.getFeatures();
+    features.forEach(feature => {
+      if (feature.getGeometry() instanceof LineString) {
+        vectorSourceRef.current.removeFeature(feature);
+      }
+    });
+  };
+
+  // Calculate and draw route between start and end locations
+  const calculateRoute = () => {
+    // Clear previous routes
+    clearRoutes();
+
+    // Find the coordinates for the selected locations
+    const startCoords = findLocationByName(startLocation);
+    const endCoords = findLocationByName(endLocation);
+
+    if (!startCoords || !endCoords) {
+      alert('Please enter valid start and end locations');
+      return;
+    }
+
     orsDirections.calculate({
-      coordinates: [startCoordinates, endCoordinates],
-      alternative_routes: { target_count: 2, share_factor: 0.6 }, // Request alternative routes
+      coordinates: [startCoords, endCoords],
+      alternative_routes: { 
+        target_count: 3, 
+        share_factor: 0.6 
+      },
       profile: 'foot-walking', 
       format: 'geojson',
     })
     .then((response: any) => {
-      const colors = ['blue', 'red', 'green']; // Different colors for alternative routes
+      const colors = ['blue', 'grey', 'black']; // Different colors for alternative routes
   
       response.features.forEach((feature: any, index: number) => {
         const routeFeature = new Feature({
@@ -179,7 +233,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
           new Style({
             stroke: new Stroke({
               color: colors[index % colors.length], // Assign a different color for each route
-              width: index = 3, 
+              width: 3, 
             }),
           })
         );
@@ -189,28 +243,53 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
     })
     .catch((err: any) => console.error('Error fetching route:', err));
   };
-  
-  
 
+  // Handle when search inputs change
+  const handleStartLocationChange = (value: string) => {
+    setStartLocation(value);
+  };
+
+  const handleEndLocationChange = (value: string) => {
+    setEndLocation(value);
+  };
+  
   return (
     <div>
       <div className="map-wrapper">
         <div className="map-page">
           <div className="top-bar">
-            <MapSearch />
-            <NavButtonGroup />
-          </div>
-          <div className={`map-root ${className || ''}`}>
-            <div ref={mapRef} className="map-container" />
-            <div className="map-controls">
+            <div className="search-container">
+              <MapSearch 
+                onStartChange={handleStartLocationChange}
+                onEndChange={handleEndLocationChange}
+                onSubmit={calculateRoute}
+              />
               <button 
-              type="button" 
-              onClick={toggleMapView} 
-              className="map-toggle-button"
+                type="button" 
+                onClick={calculateRoute}
+                className="find-route-button"
+                aria-label="Find route"
               >
-                {currentView === 'standard' ? 'Satellite View' : 'Standard View'}
+                Find Route
               </button>
             </div>
+            <NavButtonGroup aria-label="Navigation buttons for the map"/>
+          </div>
+
+          <div className={`map-root ${className || ''}`}>
+            <div 
+              ref={mapRef} 
+              className="map-container" 
+              role="application"
+              aria-label="Interactive map displaying user location and navigation"
+            />
+            <button
+              type="button"
+              onClick={toggleMapView}
+              className="map-toggle-button"
+            >
+              {currentView === 'standard' ? 'Satellite View' : 'Standard View'}
+            </button>
           </div>
         </div>
       </div>
