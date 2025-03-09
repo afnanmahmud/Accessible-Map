@@ -1,6 +1,6 @@
 import AccessibleMap from "@/components/AccessibleMap/AccessibleMap";
 import { PageTitle } from "@/components/PageTitle/PageTitle";
-import "./styles.css"
+import "./HomePage.css"
 
 const HomePage = () => {
     return (

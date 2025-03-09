@@ -1,4 +1,4 @@
-import "./styles.css"
+import "./NavButtonGroup.css"
 import { NavButtonGroupProps, NavButtonProps } from "@/types";
 import { Link } from "react-router-dom";
 import accountImage from "../../assets/accountIcon.svg";

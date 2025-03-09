@@ -1,5 +1,5 @@
 import { PageTitleProps } from "@/types";
-import "./styles.css"
+import "./PageTitle.css"
 
 export const PageTitle: React.FC<PageTitleProps> = ({ title }) => {
     return (

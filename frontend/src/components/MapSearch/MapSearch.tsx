@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MapSearchInputProps, MapSearchProps } from "@/types";
-import "./styles.css";
+import "./MapSearch.css";
 
 export const MapSearchInput: React.FC<MapSearchInputProps> = ({
   placeholder,

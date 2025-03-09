@@ -1,10 +1,11 @@
-import { AccountPageRoute } from "@/pages/AccountPage";
-import "./styles.css"
-import { IconButtonProps, NavButtonGroupProps, NavButtonProps } from "@/types";
+import { AccountPageRoute } from "@/pages/AccountPage/AccountPage";
+import "./NavButtonGroup.css"
+import { NavButtonGroupProps, NavButtonProps } from "@/types";
 import { Link } from "react-router-dom";
-import { HomePageRoute } from "@/pages/HomePage";
+import { HomePageRoute } from "@/pages/HomePage/HomePage";
 import accountImage from "../../assets/accountIcon.svg";
 import bookmark from "../../assets/bookmark.svg";
+import { IconButtonProps } from "@mui/material/IconButton/IconButton";
 
 export const NavButton: React.FC<NavButtonProps> = ({
     route,

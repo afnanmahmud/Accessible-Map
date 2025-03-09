@@ -1,5 +1,5 @@
 import { DropdownOptionProps, DropdownProps } from "@/types";
-import "./styles.css"
+import "./Dropdown.css"
 import { Link } from "react-router-dom";
 import { AccountPageRoute } from "@/pages/AccountPage/AccountPage";
 

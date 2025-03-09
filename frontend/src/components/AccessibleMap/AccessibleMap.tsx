@@ -13,10 +13,10 @@ import { Icon, Style, Stroke } from 'ol/style';
 import LineString from 'ol/geom/LineString';
 import { defaults as defaultControls } from 'ol/control';
 import { AccessibleMapProps } from '@/types';
-import MapSearch from '../MapSearch';
+import MapSearch from '../MapSearch/MapSearch';
 import NavButtonGroup from '../NavButtonGroup';
 import 'ol/ol.css';
-import './styles.css';
+import './AccessibleMap.css';
 import Openrouteservice from 'openrouteservice-js';
 
 const orsDirections = new Openrouteservice.Directions({

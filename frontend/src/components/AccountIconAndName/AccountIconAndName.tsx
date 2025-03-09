@@ -1,5 +1,5 @@
 import { AccountIconAndNameProps } from "@/types";
-import "./styles.css"
+import "./AccountIconAndName.css"
 
 const AccountIconAndName: React.FC<AccountIconAndNameProps> = ({
     src,

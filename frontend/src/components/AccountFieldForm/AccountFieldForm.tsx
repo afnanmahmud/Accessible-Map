@@ -1,5 +1,5 @@
 import { AccoundFieldProps, AccountFormProps, AccountPreferencesAndInfoProps } from "@/types";
-import "./styles.css"
+import "./AccountFieldForm.css"
 
 //user profile page
 export const AccoundField: React.FC<AccoundFieldProps> = ({
