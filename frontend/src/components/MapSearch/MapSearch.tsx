@@ -20,12 +20,6 @@ export const MapSearchInput: React.FC<MapSearchInputProps> = ({
   );
 };
 
-// Update the MapSearchProps interface in your types.ts file:
-// interface MapSearchProps {
-//   onStartChange?: (value: string) => void;
-//   onEndChange?: (value: string) => void;
-//   onSubmit?: () => void;
-// }
 
 const MapSearch: React.FC<MapSearchProps> = ({ 
   onStartChange, 
