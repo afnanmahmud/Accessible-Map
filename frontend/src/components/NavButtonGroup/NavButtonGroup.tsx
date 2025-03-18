@@ -3,8 +3,8 @@ import { NavButtonGroupProps, NavButtonProps } from "@/types";
 import { Link } from "react-router-dom";
 import accountImage from "../../assets/accountIcon.svg";
 import bookmark from "../../assets/bookmark.svg";
-import { Dropdown } from "../Dropdown/Dropdown";
-import { useState } from "react";
+import Dropdown from "../Dropdown/Dropdown";
+import { useRef, useState } from "react";
 
 export const NavButton: React.FC<NavButtonProps> = ({
     route,
@@ -22,9 +22,16 @@ export const NavButton: React.FC<NavButtonProps> = ({
 
 const NavButtonGroup: React.FC<NavButtonGroupProps> = () => {
     const [dropdown, setDropdown] = useState(false);
+    const catMenu = useRef<HTMLInputElement>(null)
+    const closeOpenMenus = (e: any) => {
+        if (dropdown && !catMenu.current?.contains(e.target)) {
+            setDropdown(false)
+        }
+    }
+    document.addEventListener('mousedown', closeOpenMenus);
 
     return (
-        <div className="nav-button-group">
+        <div className="nav-button-group" ref={catMenu}>
             <div className="nav-button">
                 <img className="nav-icon-img" src={bookmark} />
             </div>
