@@ -9,11 +9,12 @@ import { useRef, useState } from "react";
 export const NavButton: React.FC<NavButtonProps> = ({
     route,
     title,
-    style
+    style,
+    highContrast
 }) => {
     return (
-        <div className="nav-button" style={style}>
-            <Link className="nav-link round" to={route} aria-label={`Navigate to ${title}`}>
+        <div className={`nav-button`} style={style}>
+            <Link className={`nav-link round ${highContrast ? "high-contrast" : ""}`} to={route} aria-label={`Navigate to ${title}`}>
                 <a className="nav-button">{title}</a>
             </Link>
         </div>

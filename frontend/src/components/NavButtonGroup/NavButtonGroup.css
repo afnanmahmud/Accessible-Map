@@ -1,3 +1,14 @@
+:root {
+    --hc-page-bg: #222229;
+    --hc-input-border: #fec629;
+    --hc-button-bg: #468aff;
+
+    --hc-button-secondary-bg: #222229;
+    --hc-button-secondary-border: #468aff;
+
+    --hc-text-color: #ffffff;
+}
+
 .nav-button-group {
     width: 20%;
     display: flex;
@@ -16,6 +27,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.nav-link.high-contrast {
+    background-color: var(--hc-button-bg);
 }
 
 .nav-link {

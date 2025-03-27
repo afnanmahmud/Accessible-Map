@@ -38,6 +38,24 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.route-mode-toggle {
+  position: absolute;
+  font-size: 14px;
+  padding: 8px 16px;
+  margin-left: 40px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background-color: white;
+  transition: background-color 0.2s ease;
+
+}
+
+.route-mode-toggle:hover {
+  background-color: #ccc;
+  color: black;
+}
+
 .top-bar {
   width: 100%;
   display: flex;

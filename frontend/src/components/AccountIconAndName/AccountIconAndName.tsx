@@ -3,15 +3,16 @@ import "./AccountIconAndName.css"
 
 const AccountIconAndName: React.FC<AccountIconAndNameProps> = ({
     src,
-    userName
+    userName,
+    highContrast
 }) => {
     return (
         <div className="account-icon-container">
             <div className="account-icon">
-                <img className="icon" src={src} aria-label="Account icon or profile image"/>
+                <img className="icon" src={src} aria-label="Account icon or profile image" />
             </div>
             <div className="user-name">
-                <p>{userName}</p>
+                <p className={`${highContrast ? "high-contrast" : ""}`}>{userName}</p>
             </div>
         </div>
     );

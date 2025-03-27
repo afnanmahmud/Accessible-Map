@@ -22,3 +22,7 @@
     margin: 0 3rem;
     font-size: 25px;
 }
+
+p.high-contrast {
+    color: #ffffff;
+}
