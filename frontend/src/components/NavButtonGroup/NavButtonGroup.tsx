@@ -1,7 +1,7 @@
 import "./NavButtonGroup.css"
 import { NavButtonGroupProps, NavButtonProps } from "@/types";
 import { Link } from "react-router-dom";
-import accountImage from "../../assets/accountIcon.svg";
+import accountImage from "../../assets/hamburger-menu.png";
 import bookmark from "../../assets/bookmark.svg";
 import Dropdown from "../Dropdown/Dropdown";
 import { useRef, useState } from "react";

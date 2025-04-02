@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import HomePage from './pages/HomePage/HomePage';
 import AccountPage from './pages/AccountPage/AccountPage';
-import PageNotFound from './pages/PageNotFound/PageNotFound';
 
 const App: React.FC = () => {
   return (
@@ -12,7 +11,6 @@ const App: React.FC = () => {
         <Route path="/" element={<HomePage />} />
         <Route index element={<HomePage />} />
         <Route path="/account" element={<AccountPage />} />
-        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

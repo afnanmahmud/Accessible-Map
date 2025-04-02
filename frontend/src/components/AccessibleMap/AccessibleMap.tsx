@@ -18,12 +18,15 @@ import NavButtonGroup from '../NavButtonGroup/NavButtonGroup';
 import 'ol/ol.css';
 import './AccessibleMap.css';
 import Openrouteservice from 'openrouteservice-js';
+import wheelchairIcon from "./../../assets/wheelchair-icon.png";
+import volumeIcon from "./../../assets/volume-icon.png";
+import contrastIcon from "./../../assets/high-contrast-icon.png";
 
 const orsDirections = new Openrouteservice.Directions({
   api_key: '5b3ce3597851110001cf6248a1d686e75cef4e86a9782464ccdb71cf',
 });
 
-const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
+const AccessibleMap: React.FC<AccessibleMapProps> = ({ className, highContrast, setHighContrast }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<Map | null>(null);
   const [currentView, setCurrentView] = useState<'standard' | 'satellite'>('standard');
@@ -33,6 +36,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
   // State for route calculation
   const [startLocation, setStartLocation] = useState('');
   const [endLocation, setEndLocation] = useState('');
+  const [showWheelchairIcons, setShowWheelchairIcons] = useState(true);
   const [suggestions, setSuggestions] = useState<Array<{ name: string; coordinates: number[] }>>([]);
   const [routeMode, setRouteMode] = useState<'walking' | 'wheelchair'>('walking');
 
@@ -127,7 +131,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       controls: defaultControls(),
     });
 
-    placeMarkers();
+    // placeMarkers();
     startTracking();
 
     return () => {
@@ -155,12 +159,8 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
     }
   };
 
-  const toggleRouteMode = () => {
-    setRouteMode(routeMode === 'walking' ? 'wheelchair' : 'walking');
-  };
-
   // Add accessible entries
-  const placeMarkers = () => {
+  const placeMarkers = (shouldAdd: boolean) => {
     accessibility.forEach((location) => {
       const coords = fromLonLat(location.coordinates);
 
@@ -177,7 +177,11 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
       );
 
       // Add the marker to the vector source
-      vectorSourceRef.current.addFeature(marker);
+      if (shouldAdd) {
+        vectorSourceRef.current.addFeature(marker);
+      } else {
+        vectorSourceRef.current.clear();
+      }
     });
   };
 
@@ -366,6 +370,15 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
     setEndLocation(value);
   };
 
+  const toggleWheelchairLocations = () => {
+    placeMarkers(showWheelchairIcons);
+    setShowWheelchairIcons(!showWheelchairIcons)
+  }
+
+  const handleHighContrastToggle = () => {
+    setHighContrast(!highContrast)
+  }
+
   return (
     <div>
       <div className="map-wrapper">
@@ -376,6 +389,7 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
                 onStartChange={handleStartLocationChange}
                 onEndChange={handleEndLocationChange}
                 onSubmit={calculateRoute}
+                highContrast={highContrast}
               />
               <div className="route-controls">
                 <button
@@ -385,14 +399,6 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
                   aria-label="GO"
                 >
                   GO
-                </button>
-                <button
-                  type="button"
-                  onClick={toggleRouteMode}
-                  className={`route-mode-toggle ${routeMode === 'wheelchair' ? 'wheelchair-active' : ''}`}
-                  aria-label={`Switch to ${routeMode === 'wheelchair' ? 'standard walking' : 'wheelchair'} route`}
-                >
-                  {routeMode === 'wheelchair' ? ' Walking' : ' Wheelchair'}
                 </button>
               </div>
             </div>
@@ -418,6 +424,17 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
                 <div className="wheelchair-route-info">
                 </div>
               )}
+            </div>
+            <div className="icon-bar">
+              <a href="#" className="icon-container" onClick={toggleWheelchairLocations}>
+                <img className='icon' src={wheelchairIcon} />
+              </a>
+              <a href="#" className="icon-container">
+                <img className='icon' src={volumeIcon} />
+              </a>
+              <a href="#" className="icon-container" onClick={handleHighContrastToggle}>
+                <img className='icon' src={contrastIcon} />
+              </a>
             </div>
           </div>
         </div>

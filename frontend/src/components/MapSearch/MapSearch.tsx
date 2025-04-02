@@ -6,6 +6,7 @@ export const MapSearchInput: React.FC<MapSearchInputProps> = ({
   placeholder,
   location,
   setLocation,
+  highContrast
 }) => {
   return (
     <div className="input-group">
@@ -14,17 +15,18 @@ export const MapSearchInput: React.FC<MapSearchInputProps> = ({
         value={location}
         onChange={(e) => setLocation(e.target.value)}
         placeholder={placeholder}
-        className="location-input"
+        className={`location-input ${highContrast ? "high-contrast" : ""}`}
       />
     </div>
   );
 };
 
 
-const MapSearch: React.FC<MapSearchProps> = ({ 
-  onStartChange, 
+const MapSearch: React.FC<MapSearchProps> = ({
+  onStartChange,
   onEndChange,
-  onSubmit
+  onSubmit,
+  highContrast
 }) => {
   const [startLocation, setStartLocation] = useState('');
   const [endLocation, setEndLocation] = useState('');
@@ -57,6 +59,7 @@ const MapSearch: React.FC<MapSearchProps> = ({
         placeholder="Start"
         location={startLocation}
         setLocation={handleStartChange}
+        highContrast={highContrast}
       />
       <div className="route-dots">
         <span className="dot"></span>
@@ -69,6 +72,7 @@ const MapSearch: React.FC<MapSearchProps> = ({
         placeholder="End"
         location={endLocation}
         setLocation={handleEndChange}
+        highContrast={highContrast}
       />
     </div>
   );

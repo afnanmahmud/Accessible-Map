@@ -13,25 +13,15 @@ export type MapViewType = 'standard' | 'satellite';
 
 export interface AccessibleMapProps {
   className?: string;
-  highContrast: boolean;
-  setHighContrast: (flag: boolean) => void;
 }
 
 export interface PageTitleProps {
   title: string;
 }
-export interface MapSearchProps {
-  highContrast: boolean;
-}
+export interface MapSearchProps { }
 export interface NavButtonGroupProps { }
-export interface AccountFormProps {
-  highContrast: boolean;
-  setHighContrast: (flag: boolean) => void;
-}
-export interface AccountPreferencesAndInfoProps {
-  highContrast: boolean;
-  setHighContrast: (flag: boolean) => void;
-}
+export interface AccountFormProps { }
+export interface AccountPreferencesAndInfoProps { }
 export interface DropdownProps { }
 export interface DropdownOptionProps {
   optionName: string;
@@ -40,20 +30,17 @@ export interface DropdownOptionProps {
 export interface AccoundFieldProps {
   fieldName: string;
   hidden: boolean;
-  highContrast: boolean;
 }
 export interface AccountIconAndNameProps {
   src?: string;
   userName: string;
-  highContrast: boolean;
 }
 export interface NavButtonProps {
   route: string;
   title: string;
   style?: React.CSSProperties;
-  highContrast: boolean;
 }
-export interface MapSearchProps {
+export interface MapSearchProps 
   onStartChange?: (value: string) => void;
   onEndChange?: (value: string) => void;
   onSubmit?: () => void;
@@ -62,5 +49,4 @@ export interface MapSearchInputProps {
   placeholder: string;
   location: string;
   setLocation: (value: string) => void;
-  highContrast: boolean;
 }
